@@ -1,6 +1,4 @@
 # Práctica de laboratorio 4: Traducción dirigida por la sintaxis
-Esta práctica tiene como objetivo configurar el entorno de trabajo para el resto de prácicas de la asignatura. Se utiliza JavaScript como lenguaje principal y se introduce Jison como generador de analizadores sintácticos para crear estructuras como árboles sintácticos abstractos (AST).
-
 Está práctica tiene como objetivo el desarrollo de una calculadora aritmética utilizando **Jison**, un generador de analizadores sintácticos para **JavaScript**. La idea será implementar una **definición dirigida por la sintaxis** que permita no solo reconocer expresiones matemáticas, sino que también calcular su valor en tiempo real durante el análisis.
 
 Esta práctica forma parte de la asignatura **Procesadores de Lenguajes**, una de las [asignaturas obligatorias del itinerario de Computación](https://drive.google.com/file/d/12ELpn-UL12sExDYd6yw_X6WwZVcq4q4G/view).
