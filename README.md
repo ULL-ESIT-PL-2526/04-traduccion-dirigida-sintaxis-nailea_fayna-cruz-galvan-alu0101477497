@@ -10,6 +10,9 @@ Las tareas que debemos realizar para configurar el entorno serán:
 
 1. Instalar dependencias y ejecutar los test
 2. Cuestiones sobre el Lexer en Jison
+3. Modificar el analizador léxico de grammar.jison para que se salte los comentarios de una línea que empiezan por //.
+4. Modificar el analizador léxico de grammar.jison para que reconozca números en punto flotante.
+5. Añadir pruebas para las modificaciones del analizador léxico de grammar.jison.
 
 ---
 
@@ -20,7 +23,7 @@ El repositorio ya incluía una base con la gramática, el lexer y las funciones 
 - Compilación: Se generó el analizador sintáctico ejecutable con el comando `npx jison src/grammar.jison -o src/parser.js`.
 - Test: Se ejecutó `npm test` para comprobar que todo funcionaba correctamente.
 
-![test](media/test)
+![test](media/test.png)
 
 ### 2. Cuestiones sobre el Lexer en Jison
 
@@ -55,3 +58,27 @@ EOF se devuelve cuando se llega al final del fichero y no no quedan más caracte
 5. **Explique por qué existe la regla . que devuelve INVALID.**
 
 La regla *.* se aplicará a cualquier carácter que no haya sido reconocido por las reglas anteriores. Nos va a servir para identificar errores, como devolvemos el token *INVALID* podremos gestionar dicho error como queramos. De esta manera el programa no se rompe de golpe sino que podemos decir, por ejemplo, `Expecting 'NUMBER', got 'INVALID'`.
+
+### 3. Modificar el analizador léxico de grammar.jison para que se salte los comentarios de una línea que empiezan por //.
+
+Para lograr que el analizador ignore los comentarios, he añadido una nueva regla al bloque %lex en el archivo `grammar.jison`:
+
+`"//".*           { /* skip comments */ }`
+
+Gracias a esta regla, cualquier texto que empiece por //, seguido de cualquier carácter (.*), será ignorado.
+
+![comments](media/comments.png)
+
+### 4. Modificar el analizador léxico de grammar.jison para que reconozca números en punto flotante.
+
+Lo que hice en este caso fue modificar la regla original que decía que los números seguían la regla [0-9]+. Esta es la nueva expresión regular:
+
+`[0-9]+(\.[0-9]+)?([eE][-+]?[0-9]+)?      { return 'NUMBER'; }`
+
+Con esta nueva expresión, el token NUMBER puede reconocer números **enteros**, u opcionalmente tener **parte decimal**, con **notación científica**, o **ambas**. Para la notación científica acepta tanto negativos como positivos, y *e* mayúscula y minúscula.
+
+![float-numbers](media/float-numbers.png)
+
+### 5. Añadir pruebas para las modificaciones del analizador léxico de grammar.jison.
+
+Para verificar que las modificaciones funcionan correctamente, he añadido nuevas pruebas al fichero `parser.test.js`. Además de comprobar que se procesan correctamente (ignorando los comentarios y tomando los flotantes como números), se hacen operaciones con números float.
