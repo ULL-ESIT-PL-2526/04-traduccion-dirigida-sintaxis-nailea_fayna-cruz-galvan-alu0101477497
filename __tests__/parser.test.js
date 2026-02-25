@@ -143,8 +143,8 @@ describe('Parser Tests', () => {
       expect(parse("23")).toBe(23);
     });
 
-    test('should perform operations with complex numbers', () => {
-      expect(parse("1.5 + 1.5")).toBe(3);
+    test('should perform operations with float numbers', () => {
+      expect(parse("1.5 + 1.5 // esto es un comentario")).toBe(3);
       expect(parse("1e2 * 2")).toBe(200);
       expect(parse("10 / 2.5")).toBe(4);
     });
