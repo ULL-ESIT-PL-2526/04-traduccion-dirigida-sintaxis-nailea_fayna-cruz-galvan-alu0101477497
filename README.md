@@ -82,3 +82,11 @@ Con esta nueva expresión, el token NUMBER puede reconocer números **enteros**,
 ### 5. Añadir pruebas para las modificaciones del analizador léxico de grammar.jison.
 
 Para verificar que las modificaciones funcionan correctamente, he añadido nuevas pruebas al fichero `parser.test.js`. Además de comprobar que se procesan correctamente (ignorando los comentarios y tomando los flotantes como números), se hacen operaciones con números float.
+
+Estos son las pruebas añadidas:
+
+![modified-test](media/modified-test.png)
+
+Y vemos que se ejecutan correctamente:
+
+![test-final](media/test-final.png)
