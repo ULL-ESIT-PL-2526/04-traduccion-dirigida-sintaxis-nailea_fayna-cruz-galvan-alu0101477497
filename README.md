@@ -1,31 +1,23 @@
-# Syntax Directed Translation with Jison
+# Práctica de laboratorio 4: Traducción dirigida por la sintaxis
+Esta práctica tiene como objetivo configurar el entorno de trabajo para el resto de prácicas de la asignatura. Se utiliza JavaScript como lenguaje principal y se introduce Jison como generador de analizadores sintácticos para crear estructuras como árboles sintácticos abstractos (AST).
 
-Jison is a tool that receives as input a Syntax Directed Translation and produces as output a JavaScript parser  that executes
-the semantic actions in a bottom up ortraversing of the parse tree.
- 
+Está práctica tiene como objetivo el desarrollo de una calculadora aritmética utilizando **Jison**, un generador de analizadores sintácticos para **JavaScript**. La idea será implementar una **definición dirigida por la sintaxis** que permita no solo reconocer expresiones matemáticas, sino que también calcular su valor en tiempo real durante el análisis.
 
-## Compile the grammar to a parser
+Esta práctica forma parte de la asignatura **Procesadores de Lenguajes**, una de las [asignaturas obligatorias del itinerario de Computación](https://drive.google.com/file/d/12ELpn-UL12sExDYd6yw_X6WwZVcq4q4G/view).
 
-See file [grammar.jison](./src/grammar.jison) for the grammar specification. To compile it to a parser, run the following command in the terminal:
-``` 
-➜  jison git:(main) ✗ npx jison grammar.jison -o parser.js
-```
+## Estructura del informe
+Las tareas que debemos realizar para configurar el entorno serán:
 
-## Use the parser
+1. Instalar dependencias y ejecutar los test
+2. 
 
-After compiling the grammar to a parser, you can use it in your JavaScript code. For example, you can run the following code in a Node.js environment:
+---
 
-```
-➜  jison git:(main) ✗ node                                
-Welcome to Node.js v25.6.0.
-Type ".help" for more information.
-> p = require("./parser.js")
-{
-  parser: { yy: {} },
-  Parser: [Function: Parser],
-  parse: [Function (anonymous)],
-  main: [Function: commonjsMain]
-}
-> p.parse("2*3")
-6
-```
+### 1. Instalar dependencias y ejecutar los test
+El repositorio ya incluía una base con la gramática, el lexer y las funciones de cálculo. Los pasos realizados fueron:
+
+- Instalación: Se ejecutó `npm install` para obtener las dependencias necesarias, como Jison y Jest.
+- Compilación: Se generó el analizador sintáctico ejecutable con el comando `npx jison src/grammar.jison -o src/parser.js`.
+- Test: Se ejecutó `npm test` para comprobar que todo funcionaba correctamente.
+
+![test](media/test)
