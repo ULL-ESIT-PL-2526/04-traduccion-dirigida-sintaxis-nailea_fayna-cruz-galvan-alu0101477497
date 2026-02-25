@@ -9,7 +9,7 @@ Esta práctica forma parte de la asignatura **Procesadores de Lenguajes**, una d
 Las tareas que debemos realizar para configurar el entorno serán:
 
 1. Instalar dependencias y ejecutar los test
-2. 
+2. Cuestiones sobre el Lexer en Jison
 
 ---
 
@@ -21,3 +21,37 @@ El repositorio ya incluía una base con la gramática, el lexer y las funciones 
 - Test: Se ejecutó `npm test` para comprobar que todo funcionaba correctamente.
 
 ![test](media/test)
+
+### 2. Cuestiones sobre el Lexer en Jison
+
+1. **Describa la diferencia entre /\* skip whitespace \*/ y devolver un token.**
+
+Cuando usamos `/* skip whitespace */` lo que sucede es que el analizador lo ignora y pasa al siguiente carácter, como si no hubiera habido nada en el fichero. Sin embargo, cuando usamos `return` el lexer lo identifica (ya sea número u operador) y se lo pasa al analizador sintáctico.
+
+2. **Escriba la secuencia exacta de tokens producidos para la entrada 123\*\*45+@.**
+
+123 → NUMBER
+
+\** → OP
+
+45 → NUMBER
+
+\+ → OP
+
+@ → INVALID
+
+al terminar la entrada → EOF
+
+3. **Indique por qué ** debe aparecer antes que [-+*/].**
+
+Porque el lexer aplica las reglas en orden. Es decir, si tenemos la regla de [-+*/] antes que **, no llegaría a ** sino que se quedaría con * y luego el segundo * como otro OP diferente. Lo que queremos es que ** se reconozca como un solo operador para evitar errores. Siempre que una regla pueda coincidir al inicio con otra, debemos escribir la más larga arriba.
+
+Esto también puede coincidir con *else* y *elseif*, que siguiendo esta lógica, *elseif* tendría que ir el primero.
+
+4. **Explique cuándo se devuelve EOF.**
+
+EOF se devuelve cuando se llega al final del fichero y no no quedan más caracteres por leer. Es una forma de indicarle al parser que el análisis ha terminado.
+
+5. **Explique por qué existe la regla . que devuelve INVALID.**
+
+La regla *.* se aplicará a cualquier carácter que no haya sido reconocido por las reglas anteriores. Nos va a servir para identificar errores, como devolvemos el token *INVALID* podremos gestionar dicho error como queramos. De esta manera el programa no se rompe de golpe sino que podemos decir, por ejemplo, `Expecting 'NUMBER', got 'INVALID'`.
