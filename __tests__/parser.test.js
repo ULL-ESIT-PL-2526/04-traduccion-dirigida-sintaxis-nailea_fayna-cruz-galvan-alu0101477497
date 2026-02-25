@@ -110,7 +110,7 @@ describe('Parser Tests', () => {
       expect(() => parse("3 +")).toThrow();
       expect(() => parse("+ 3")).toThrow();
       expect(() => parse("3 + + 4")).toThrow();
-      expect(() => parse("3.5")).toThrow(); // Only integers are supported
+      // expect(() => parse("3.5")).toThrow(); // now integers are allowed
     });
 
     test('should handle incomplete expressions', () => {
@@ -128,4 +128,25 @@ describe('Parser Tests', () => {
     });
   });
 
+  describe('TEST PRÁCTICA 4', () => {
+    test('should ignore one-line comments', () => {
+      expect(parse("10 + 5 // esto es un comentario")).toBe(15);
+      expect(parse("20 / 2 //esto es un comentario")).toBe(10);
+      expect(parse("42 // +42")).toBe(42);
+    });
+
+    test('should recognize floating-point numbers', () => {
+      expect(parse("2.35e-3")).toBe(0.00235);
+      expect(parse("2.35e+3")).toBe(2350);
+      expect(parse("2.35E-3")).toBe(0.00235);
+      expect(parse("2.35")).toBe(2.35);
+      expect(parse("23")).toBe(23);
+    });
+
+    test('should perform operations with complex numbers', () => {
+      expect(parse("1.5 + 1.5")).toBe(3);
+      expect(parse("1e2 * 2")).toBe(200);
+      expect(parse("10 / 2.5")).toBe(4);
+    });
+  });
 });
