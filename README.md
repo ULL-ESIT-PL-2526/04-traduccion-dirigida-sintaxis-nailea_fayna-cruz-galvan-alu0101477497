@@ -1,5 +1,5 @@
 # Práctica de laboratorio 4: Traducción dirigida por la sintaxis
-Está práctica tiene como objetivo el desarrollo de una calculadora aritmética utilizando **Jison**, un generador de analizadores sintácticos para **JavaScript**. La idea será implementar una **definición dirigida por la sintaxis** que permita no solo reconocer expresiones matemáticas, sino que también calcular su valor en tiempo real durante el análisis.
+Está práctica tiene como objetivo analizar una calculadora aritmética que utiliza **Jison**, un generador de analizadores sintácticos para **JavaScript**. Esta sigue una **definición dirigida por la sintaxis** que permite no solo reconocer expresiones matemáticas, sino que también calcular su valor en tiempo real durante el análisis. Analizaremos su comportamiento y haremos algunas modificaciones
 
 Esta práctica forma parte de la asignatura **Procesadores de Lenguajes**, una de las [asignaturas obligatorias del itinerario de Computación](https://drive.google.com/file/d/12ELpn-UL12sExDYd6yw_X6WwZVcq4q4G/view).
 
