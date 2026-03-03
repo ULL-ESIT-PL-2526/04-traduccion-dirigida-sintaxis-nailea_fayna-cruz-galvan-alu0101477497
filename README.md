@@ -6,11 +6,22 @@ Esta práctica forma parte de la asignatura **Procesadores de Lenguajes**, una d
 ## Estructura del informe
 Las tareas que debemos realizar para configurar el entorno serán:
 
-1. Instalar dependencias y ejecutar los test
-2. Cuestiones sobre el Lexer en Jison
-3. Modificar el analizador léxico de grammar.jison para que se salte los comentarios de una línea que empiezan por //.
-4. Modificar el analizador léxico de grammar.jison para que reconozca números en punto flotante.
-5. Añadir pruebas para las modificaciones del analizador léxico de grammar.jison.
+1. **Práctica de laboratorio 4: Traducción dirigida por la sintaxis**
+   1. Instalar dependencias y ejecutar los test.
+   2. Cuestiones sobre el Lexer en Jison.
+   3. Modificar el analizador léxico de grammar.jison para que se salte los comentarios de una línea que empiezan por //.
+   4. Modificar el analizador léxico de grammar.jison para que reconozca números en punto flotante.
+   5. Añadir pruebas para las modificaciones del analizador léxico de grammar.jison.
+2. **Práctica de laboratorio 5: Traducción dirigida por la sintaxis: gramática**
+   1. Partiendo de la gramática y las siguientes frases 4.0-2.0\*3.0, 2\**3**2 y 7-4/2: 
+      1. Escribir la derivación para cada una de las frases.
+      2. Escribir el árbol de análisis sintáctico (parse tree) para cada una de las frases.
+      3. ¿En qué orden se evaluan las acciones semánticas para cada una de las frases?
+      4. Añadir un fichero prec.test.js al directorio \__test__ con las siguientes pruebas y compruebe que con la implementación actual fallan.
+   2. Modificar la gramática para que respete la lógica matemática.
+   3. Añadir pruebas para las modificaciones hechas.
+   4. Modificar el programa para que se reconozcan expresiones entre paréntesis.
+   5. Añadir pruebas para las expresiones de paréntesis.
 
 ---
 
@@ -88,3 +99,17 @@ Estos son las pruebas añadidas:
 Y vemos que se ejecutan correctamente:
 
 ![test-final](media/test-final.png)
+
+# Práctica de laboratorio 5: Traducción dirigida por la sintaxis: gramática
+
+### 1. Partiendo de la gramática y las siguientes frases 4.0-2.0\*3.0, 2\**3**2 y 7-4/2.
+
+### 1.1. Escribir la derivación para cada una de las frases.
+### 1.2. Escribir el árbol de análisis sintáctico (parse tree) para cada una de las frases.
+### 1.3. ¿En qué orden se evaluan las acciones semánticas para cada una de las frases?
+### 1.4. Añadir un fichero prec.test.js al directorio \__test__ con las siguientes pruebas y compruebe que con la implementación actual fallan.
+
+### 2. Modificar la gramática para que respete la lógica matemática.
+### 3. Añadir pruebas para las modificaciones hechas.
+### 4. Modificar el programa para que se reconozcan expresiones entre paréntesis.
+### 5. Añadir pruebas para las expresiones de paréntesis.
