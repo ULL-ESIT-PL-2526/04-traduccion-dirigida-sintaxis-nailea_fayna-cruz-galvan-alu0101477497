@@ -104,9 +104,36 @@ Y vemos que se ejecutan correctamente:
 
 ### 1. Partiendo de la gramática y las siguientes frases 4.0-2.0\*3.0, 2\**3**2 y 7-4/2.
 
+Tanto las derivaciones como los árboles de análisis sintácticos se encuentran en el [siguiente documento](derivations-and-parse-trees.pdf).
 ### 1.1. Escribir la derivación para cada una de las frases.
+- 4.0-2.0\*3.0
+
+![d1](media/d1.png)
+
+- 2\**3**2
+
+![d2](media/d2.png)
+
+- 7-4/2
+
+![d3](media/d3.png)
+
 ### 1.2. Escribir el árbol de análisis sintáctico (parse tree) para cada una de las frases.
+- 4.0-2.0\*3.0
+
+![pt1](media/pt1.png)
+
+- 2\**3**2
+
+![pt2](media/pt2.png)
+
+- 7-4/2
+
+![pt3](media/pt3.png)
+
 ### 1.3. ¿En qué orden se evaluan las acciones semánticas para cada una de las frases?
+El orden de evaluación en la gramática actual es de **izquierda a derecha** debido a su estructura recursiva por la izquierda y a que todos los operadores comparten el mismo nivel jerárquico bajo el token **OP**. Como no se han definido distintos niveles de precedencia para separar, por ejemplo, sumas de multiplicaciones, el parser simplemente aplica las acciones semánticas (operate) según van apareciendo los operadores en la frase. Esto provoca que se ignoren las reglas matemáticas estándar, evaluando siempre primero la operación que se encuentra más a la izquierda del árbol de análisis sintáctico.
+
 ### 1.4. Añadir un fichero prec.test.js al directorio \__test__ con las siguientes pruebas y compruebe que con la implementación actual fallan.
 
 ### 2. Modificar la gramática para que respete la lógica matemática.
