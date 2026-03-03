@@ -101,6 +101,7 @@ Y vemos que se ejecutan correctamente:
 ![test-final](media/test-final.png)
 
 # Práctica de laboratorio 5: Traducción dirigida por la sintaxis: gramática
+Para esta práctica se nos pide **actualizar la gramática** de manera que se respete la precedencia y la asociatividad de los operadores matemáticos, incluyendo los paréntesis.
 
 ### 1. Partiendo de la gramática y las siguientes frases 4.0-2.0\*3.0, 2\**3**2 y 7-4/2.
 
@@ -135,6 +136,9 @@ Tanto las derivaciones como los árboles de análisis sintácticos se encuentran
 El orden de evaluación en la gramática actual es de **izquierda a derecha** debido a su estructura recursiva por la izquierda y a que todos los operadores comparten el mismo nivel jerárquico bajo el token **OP**. Como no se han definido distintos niveles de precedencia para separar, por ejemplo, sumas de multiplicaciones, el parser simplemente aplica las acciones semánticas (operate) según van apareciendo los operadores en la frase. Esto provoca que se ignoren las reglas matemáticas estándar, evaluando siempre primero la operación que se encuentra más a la izquierda del árbol de análisis sintáctico.
 
 ### 1.4. Añadir un fichero prec.test.js al directorio \__test__ con las siguientes pruebas y compruebe que con la implementación actual fallan.
+Tras añadir el fichero, vemos que efectivamente todas las pruebas fallan con la implementación actual:
+
+![failed-prec-test](media/failed-prec-test.png)
 
 ### 2. Modificar la gramática para que respete la lógica matemática.
 ### 3. Añadir pruebas para las modificaciones hechas.
