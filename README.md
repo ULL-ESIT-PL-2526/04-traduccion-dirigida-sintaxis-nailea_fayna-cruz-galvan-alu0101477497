@@ -153,5 +153,13 @@ Una vez hemos hecho este cambio, podemos ver como ahora sí que pasan las prueba
 ![passed-prec-test](media/passed-prec-test.png)
 
 ### 3. Añadir pruebas para las modificaciones hechas.
+Estas son las pruebas que se han añadido para comprobar que la precedencia y asociatividad funcionan con los números flotantes:
+
+![new_prec_test](media/new-prec-test.png)
+
+Que han sido añadidas al final del fichero `prec.test.js`, y como vemos aquí las pruebas pasan:
+
+![passed-new-prec-test](media/passed-new-prec-test.png)
+
 ### 4. Modificar el programa para que se reconozcan expresiones entre paréntesis.
 ### 5. Añadir pruebas para las expresiones de paréntesis.
