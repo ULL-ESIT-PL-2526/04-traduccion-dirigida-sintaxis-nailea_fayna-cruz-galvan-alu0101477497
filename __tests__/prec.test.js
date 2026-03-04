@@ -40,7 +40,7 @@ describe('Parser Failing Tests', () => {
     expect(parse("2 * 3 + 4 * 5")).toBe(26); // (2 * 3) + (4 * 5) = 26
   });
 
-  describe('Test práctica 5', () => {
+  describe('Test práctica 5 punto 3', () => {
     test('should handle multiplication and division before addition and subtraction with floats', () => {
       expect(parse("1.5 + 2.5 * 2.0")).toBe(6.5); // 1.5 + (2.5 * 2.0) = 6.5
       expect(parse("10.0 - 3.0 / 1.5")).toBe(8.0); // 10.0 - (3.0 / 1.5) = 8.0
@@ -59,6 +59,23 @@ describe('Parser Failing Tests', () => {
     test('should handle scientific notation mixed with precedence', () => {
       expect(parse("2e1 + 3e1 * 2")).toBe(80); // 20 + (30 * 2) = 80
       expect(parse("1.5e2 / 2 - 10")).toBe(65); // (150 / 2) - 10 = 65
+    });
+  });
+
+  describe('Test práctica 5 punto 5', () => {
+    test('should prioritize expressions inside parentheses', () => {
+      expect(parse("(2 + 3) * 4")).toBe(20);
+      expect(parse("10 - (6 / 2)")).toBe(7);
+      expect(parse("2 * (3 ** 2)")).toBe(18);
+    });
+
+    test('should handle nested parentheses', () => {
+      expect(parse("((1 + 2) * 3) - 4")).toBe(5);
+      expect(parse("2 ** (3 ** 2)")).toBe(512); 
+    });
+    
+    test('should handle complex mixed operations with parentheses and floats', () => {
+      expect(parse("10.0 / (2.0 + 3.0) * (4.5 - 2.5)")).toBe(4);
     });
   });
 });
