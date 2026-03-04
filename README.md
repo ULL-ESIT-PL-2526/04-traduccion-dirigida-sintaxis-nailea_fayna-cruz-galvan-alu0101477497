@@ -141,6 +141,17 @@ Tras añadir el fichero, vemos que efectivamente todas las pruebas fallan con la
 ![failed-prec-test](media/failed-prec-test.png)
 
 ### 2. Modificar la gramática para que respete la lógica matemática.
+Como habíamos visto, el error era que todos los operadores compartían el mismo nivel. Para respetar la precedencia y la asociatividad, se ha reestructurado `grammar.jison` dividiendo la evaluación siguiendo las producciones que están en el guión de la práctica. Vamos a eliminar el token genérico **OP** para simplemente utilizar los operadores literales y poder distinguirlo más facilmente.
+
+- **E → E1 opad T** (Sumas y restas): Tienen la menor prioridad. Usamos recursividad por la izquierda (E '+' T) ya que estos operadores son asociativos por la izquierda.
+- **T → T1 opmu R** (Multiplicación y división): Al anidarse dentro de E, el parser las resuelve antes. También son asociativas por la izquierda.
+- **R → F opow R** (Potencias): Tienen la máxima precedencia matemática. Para lograr la asociatividad por la derecha, ubicamos la recursión a la derecha del operador (F '**' R).
+- **F → number** (Números): La regla base que procesa los valores reales.
+
+Una vez hemos hecho este cambio, podemos ver como ahora sí que pasan las pruebas:
+
+![passed-prec-test](media/passed-prec-test.png)
+
 ### 3. Añadir pruebas para las modificaciones hechas.
 ### 4. Modificar el programa para que se reconozcan expresiones entre paréntesis.
 ### 5. Añadir pruebas para las expresiones de paréntesis.
