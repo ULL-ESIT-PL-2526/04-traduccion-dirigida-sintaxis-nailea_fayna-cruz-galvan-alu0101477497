@@ -143,10 +143,10 @@ Tras añadir el fichero, vemos que efectivamente todas las pruebas fallan con la
 ### 2. Modificar la gramática para que respete la lógica matemática.
 Como habíamos visto, el error era que todos los operadores compartían el mismo nivel. Para respetar la precedencia y la asociatividad, se ha reestructurado `grammar.jison` dividiendo la evaluación siguiendo las producciones que están en el guión de la práctica. Vamos a eliminar el token genérico **OP** para simplemente utilizar los operadores literales y poder distinguirlo más facilmente.
 
-- **E → E1 opad T** (Sumas y restas): Tienen la menor prioridad. Usamos recursividad por la izquierda (E '+' T) ya que estos operadores son asociativos por la izquierda.
-- **T → T1 opmu R** (Multiplicación y división): Al anidarse dentro de E, el parser las resuelve antes. También son asociativas por la izquierda.
-- **R → F opow R** (Potencias): Tienen la máxima precedencia matemática. Para lograr la asociatividad por la derecha, ubicamos la recursión a la derecha del operador (F '**' R).
-- **F → number** (Números): La regla base que procesa los valores reales.
+- **E** (Sumas y restas): Tienen la menor prioridad. Usamos recursividad por la izquierda (E '+' T) ya que estos operadores son asociativos por la izquierda.
+- **T** (Multiplicación y división): Al anidarse dentro de E, el parser las resuelve antes. También son asociativas por la izquierda.
+- **R** (Potencias): Tienen la máxima precedencia matemática. Para lograr la asociatividad por la derecha, ubicamos la recursión a la derecha del operador (F '**' R).
+- **F** (Números): La regla base que procesa los valores reales.
 
 Una vez hemos hecho este cambio, podemos ver como ahora sí que pasan las pruebas:
 
@@ -162,4 +162,17 @@ Que han sido añadidas al final del fichero `prec.test.js`, y como vemos aquí l
 ![passed-new-prec-test](media/passed-new-prec-test.png)
 
 ### 4. Modificar el programa para que se reconozcan expresiones entre paréntesis.
+Para reconocer paréntesis, la implementación fue más sencilla porque partimos de una buena base del punto 3. Se modificaron solo dos detalles para aceptar los nuevos tokens ( y ):
+
+- Añadimos los paréntesis a la expresión regular de los operadores **([-+*/()])**.
+- Añadimos la producción F -> '(' E ')' a la regla F. Tal y como se se indica en el guión, se devuelve el valor de E para que el parser evalue lo que hay dentro primero. 
+
 ### 5. Añadir pruebas para las expresiones de paréntesis.
+
+Estas son las pruebas que se han añadido al final del fichero `prec.test.js` para comprobar que los paréntesis funcionan correctamente:
+
+![parenthesis](media/parenthesis.png)
+
+Y pasan correctamente:
+
+![parenthesis-test](media/parenthesis-test.png)
