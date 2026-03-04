@@ -39,4 +39,26 @@ describe('Parser Failing Tests', () => {
     expect(parse("100 - 50 + 25")).toBe(75); // (100 - 50) + 25 = 75
     expect(parse("2 * 3 + 4 * 5")).toBe(26); // (2 * 3) + (4 * 5) = 26
   });
+
+  describe('Test práctica 5', () => {
+    test('should handle multiplication and division before addition and subtraction with floats', () => {
+      expect(parse("1.5 + 2.5 * 2.0")).toBe(6.5); // 1.5 + (2.5 * 2.0) = 6.5
+      expect(parse("10.0 - 3.0 / 1.5")).toBe(8.0); // 10.0 - (3.0 / 1.5) = 8.0
+    });
+
+    test('should handle exponentiation precedence with floats', () => {
+      expect(parse("2.0 * 1.5 ** 2.0")).toBe(4.5); // 2.0 * (1.5 ** 2.0) = 4.5
+      expect(parse("1.5 ** 2.0 + 1.25")).toBe(3.5); // (1.5 ** 2.0) + 1.25 = 3.5
+    });
+
+    test('should handle associativity for same precedence operations with floats', () => {
+      expect(parse("10.5 - 2.5 - 1.0")).toBe(7.0); // (10.5 - 2.5) - 1.0 = 7.0
+      expect(parse("12.5 / 2.0 / 2.5")).toBe(2.5); // (12.5 / 2.0) / 2.5 = 2.5
+    });
+    
+    test('should handle scientific notation mixed with precedence', () => {
+      expect(parse("2e1 + 3e1 * 2")).toBe(80); // 20 + (30 * 2) = 80
+      expect(parse("1.5e2 / 2 - 10")).toBe(65); // (150 / 2) - 10 = 65
+    });
+  });
 });
