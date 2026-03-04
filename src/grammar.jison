@@ -1,33 +1,55 @@
 /* Lexer */
 %lex
 %%
-\s+                                     { /* skip whitespace */; }
-"//".*                                  { /* skip comments */ }
-[0-9]+(\.[0-9]+)?([eE][-+]?[0-9]+)?     { return 'NUMBER'; }
-"**"                                    { return 'OP';           }
-[-+*/]                                  { return 'OP';           }
-<<EOF>>                                 { return 'EOF';          }
-.                                       { return 'INVALID';      }
+\s+                                     { /* skip whitespace */ }
+"//".*                                  { /* skip comments */   }
+[0-9]+(\.[0-9]+)?([eE][-+]?[0-9]+)?     { return 'NUMBER';      }
+"**"                                    { return '**';          }
+[-+*/]                                  { return yytext;        }
+<<EOF>>                                 { return 'EOF';         }
+.                                       { return 'INVALID';     }
 /lex
 
 /* Parser */
-%start expressions
-%token NUMBER
+%start L
+
 %%
 
-expressions
-    : expression EOF
-        { return $expression; }
+/* L -> E eof */
+L
+    : E EOF
+        { return $1; }
     ;
 
-expression
-    : expression OP term
-        { $$ = operate($OP, $expression, $term); }
-    | term
-        { $$ = $term; }
+/* E → E1 opad T (addition and subtraction) */
+E
+    : E '+' T
+        { $$ = operate('+', $1, $3); }
+    | E '-' T
+        { $$ = operate('-', $1, $3); }
+    | T
+        { $$ = $1; }
     ;
 
-term
+/* T → T1 opmul R (multiplication and division) */
+T
+    : T '*' R
+        { $$ = operate('*', $1, $3); }
+    | T '/' R
+        { $$ = operate('/', $1, $3); }
+    | R
+        { $$ = $1; }
+    ;
+
+/* R → F opow R (pow) */
+R
+    : F '**' R
+        { $$ = operate('**', $1, $3); }
+    | F
+        { $$ = $1; }
+    ;
+
+F
     : NUMBER
         { $$ = Number(yytext); }
     ;
