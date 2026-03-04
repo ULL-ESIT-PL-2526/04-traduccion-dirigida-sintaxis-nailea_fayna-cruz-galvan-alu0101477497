@@ -5,7 +5,7 @@
 "//".*                                  { /* skip comments */   }
 [0-9]+(\.[0-9]+)?([eE][-+]?[0-9]+)?     { return 'NUMBER';      }
 "**"                                    { return '**';          }
-[-+*/]                                  { return yytext;        }
+[-+*/()]                                { return yytext;        }
 <<EOF>>                                 { return 'EOF';         }
 .                                       { return 'INVALID';     }
 /lex
@@ -52,6 +52,8 @@ R
 F
     : NUMBER
         { $$ = Number(yytext); }
+    | '(' E ')'
+        { $$ = $2; }
     ;
 %%
 
